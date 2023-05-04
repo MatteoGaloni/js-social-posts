@@ -60,11 +60,10 @@ const posts = [
     created: "2021-03-05",
   },
 ];
-
-const d = new Date("2022-03-25");
-
+let likeCounter;
 // *****Ciclo sull'array per ottenere gli oggetti all'interno******
 for (let i = 0; i < posts.length; i++) {
+  likeCounter = i;
   const postElement = posts[i];
   const elContainer = document.getElementById("container");
   let tagContent = `<div id="${i + 1}" class="post">`;
@@ -99,10 +98,22 @@ for (let i = 0; i < posts.length; i++) {
   tagContent += `</a>`;
   tagContent += `</div>`;
   tagContent += `<div class="likes__counter">`;
-  tagContent += `Piace a <b id="like-counter-1" class="js-likes-counter">80</b> persone`;
+  tagContent += `Piace a <b id="like-counter-${
+    i + 1
+  }" class="js-likes-counter">${posts[i].likes}</b> persone`;
   tagContent += `</div>`;
   tagContent += `</div>`;
   tagContent += `</div>`;
   tagContent += `</div>`;
   elContainer.innerHTML += tagContent;
+}
+
+const like = document.getElementsByClassName(`js-like-button`);
+function addLike() {
+  for (let index = 0; index < like.length; index++) {
+    const likeElement = like[index];
+    likeElement.addEventListener("click", function () {
+      console.log(likeElement);
+    });
+  }
 }
