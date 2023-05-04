@@ -112,10 +112,11 @@ for (let index = 0; index < like.length; index++) {
   const likeElement = like[index];
   likeElement.addEventListener("click", function (e) {
     e.preventDefault();
-    console.log(likeElement);
-    posts[index].likes += +1;
-    console.log(posts[index].likes);
+    // console.log(likeElement);
+    const likeCounter = document.querySelector(`#like-counter-${index + 1}`);
+    console.log(likeCounter);
+    likeCounter.innerHTML = posts[index].likes += +1;
+    likeCounter.classList.add("like-button--liked");
+    // console.log(posts[index].likes);
   });
 }
-const likeCounter = document.getElementById("like-counter-1");
-console.log(likeCounter);
