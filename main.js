@@ -107,7 +107,6 @@ for (let i = 0; i < posts.length; i++) {
 }
 
 const like = document.getElementsByClassName(`js-like-button`);
-// const likeCounter = getElementsById(`js-likes-counter-1`);
 
 for (let index = 0; index < like.length; index++) {
   const likeElement = like[index];
@@ -116,7 +115,7 @@ for (let index = 0; index < like.length; index++) {
     console.log(likeElement);
     posts[index].likes += +1;
     console.log(posts[index].likes);
-    // likeCounter.innerHTML = posts[index].likes += +1;
   });
 }
-// ${index + 1}
+const likeCounter = document.getElementById("like-counter-1");
+console.log(likeCounter);
