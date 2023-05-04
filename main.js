@@ -61,6 +61,8 @@ const posts = [
   },
 ];
 
+const d = new Date("2022-03-25");
+
 // *****Ciclo sull'array per ottenere gli oggetti all'interno******
 for (let i = 0; i < posts.length; i++) {
   const postElement = posts[i];
@@ -76,19 +78,22 @@ for (let i = 0; i < posts.length; i++) {
   tagContent += `<img class="profile-pic" src="${posts[i].author.image}" alt="${posts[i].author.name}">`;
   tagContent += `</div>`;
   tagContent += `<div class="post-meta__data">`;
-  tagContent += `<div class="post-meta__author">Phil Mangione</div>`;
-  tagContent += `<div class="post-meta__time">4 mesi fa</div>`;
+  tagContent += `<div class="post-meta__author">"${posts[i].author.name}"</div>`;
+  tagContent += `<div class="post-meta__time">"${new Date(
+    posts[i].created
+  )})"</div>`;
   tagContent += `</div>`;
   tagContent += `</div>`;
-  tagContent += `<div class="post__text">Placeat libero ipsa nobis ipsum quibusdam quas harum ut. Distinctio minima iusto. Ad
-                  ad maiores et sint voluptate recusandae architecto. Et nihil ullam aut alias.</div>`;
+  tagContent += `<div class="post__text">${posts[i].content}</div>`;
   tagContent += `<div class="post__image">`;
-  tagContent += `<img src="https://unsplash.it/600/300?image=171" alt="">`;
+  tagContent += `<img src="${posts[i].media}" alt="">`;
   tagContent += `</div>`;
   tagContent += `<div class="post__footer">`;
   tagContent += `<div class="likes js-likes">`;
   tagContent += `<div class="likes__cta">`;
-  tagContent += `<a class="like-button  js-like-button" href="#" data-postid="1">`;
+  tagContent += `<a class="like-button  js-like-button" href="#" data-postid="${
+    i + 1
+  }">`;
   tagContent += `<i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>`;
   tagContent += `<span class="like-button__label">Mi Piace</span>`;
   tagContent += `</a>`;
