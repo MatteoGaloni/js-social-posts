@@ -62,8 +62,9 @@ const posts = [
 ];
 // *****Ciclo sull'array per ottenere gli oggetti all'interno******
 for (let i = 0; i < posts.length; i++) {
-  const postElement = posts[i];
   const elContainer = document.getElementById("container");
+  const d = new Date(posts[i].created.toString());
+  const newDate = `${d.getDate()}/${d.getMonth()}/${d.getFullYear()}`;
   let tagContent = `<div id="${i + 1}" class="post">`;
   tagContent += `<div class="post__header">`;
   tagContent += `<div class="post-meta">`;
@@ -79,10 +80,8 @@ for (let i = 0; i < posts.length; i++) {
   }
   tagContent += `</div>`;
   tagContent += `<div class="post-meta__data">`;
-  tagContent += `<div class="post-meta__author">"${posts[i].author.name}"</div>`;
-  tagContent += `<div class="post-meta__time">"${new Date(
-    posts[i].created
-  )})"</div>`;
+  tagContent += `<div class="post-meta__author">${posts[i].author.name}</div>`;
+  tagContent += `<div class="post-meta__time">${newDate}</div>`;
   tagContent += `</div>`;
   tagContent += `</div>`;
   tagContent += `<div class="post__text">${posts[i].content}</div>`;
@@ -109,7 +108,7 @@ for (let i = 0; i < posts.length; i++) {
   tagContent += `</div>`;
   elContainer.innerHTML += tagContent;
 }
-
+// creo ciclo per incrementare contatore like e aggiungere classe
 let arrayCounter = [];
 const like = document.getElementsByClassName(`js-like-button`);
 for (let index = 0; index < like.length; index++) {
@@ -120,8 +119,12 @@ for (let index = 0; index < like.length; index++) {
     likeCounter = document.querySelector(`#like-counter-${index + 1}`);
     if (!arrayCounter.includes(likeCounter)) {
       arrayCounter.push(likeCounter);
-      likeCounter.innerHTML = posts[index].likes += +1;
-      likeCounter.classList.add("like-button--liked");
+      likeCounter.innerHTML = posts[index].likes += 1;
+      likeElement.classList.add("like-button--liked");
+    } else {
+      arrayCounter.pop(likeCounter);
+      likeElement.classList.remove("like-button--liked");
+      likeCounter.innerHTML = posts[index].likes -= 1;
     }
     // console.log(posts[index].likes);
   });
