@@ -69,10 +69,14 @@ for (let i = 0; i < posts.length; i++) {
   tagContent += `<div class="post-meta">`;
   tagContent += `<div class="post-meta__icon">`;
   if (posts[i].author.image == null) {
-    posts[i].author.image =
-      "https://images.unsplash.com/photo-1558098329-a11cff621064?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=390&q=80";
+    tagContent += `<div class="profile-pic-default">`;
+    tagContent += `<span>LF</span>`;
+    tagContent += `</div>`;
+    // posts[i].author.image =
+    //   "https://images.unsplash.com/photo-1558098329-a11cff621064?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=390&q=80";
+  } else {
+    tagContent += `<img class="profile-pic" src="${posts[i].author.image}" alt="${posts[i].author.name}">`;
   }
-  tagContent += `<img class="profile-pic" src="${posts[i].author.image}" alt="${posts[i].author.name}">`;
   tagContent += `</div>`;
   tagContent += `<div class="post-meta__data">`;
   tagContent += `<div class="post-meta__author">"${posts[i].author.name}"</div>`;
@@ -106,17 +110,20 @@ for (let i = 0; i < posts.length; i++) {
   elContainer.innerHTML += tagContent;
 }
 
+let arrayCounter = [];
 const like = document.getElementsByClassName(`js-like-button`);
-
 for (let index = 0; index < like.length; index++) {
   const likeElement = like[index];
   likeElement.addEventListener("click", function (e) {
     e.preventDefault();
     // console.log(likeElement);
-    const likeCounter = document.querySelector(`#like-counter-${index + 1}`);
-    console.log(likeCounter);
-    likeCounter.innerHTML = posts[index].likes += +1;
-    likeCounter.classList.add("like-button--liked");
+    likeCounter = document.querySelector(`#like-counter-${index + 1}`);
+    if (!arrayCounter.includes(likeCounter)) {
+      arrayCounter.push(likeCounter);
+      likeCounter.innerHTML = posts[index].likes += +1;
+      likeCounter.classList.add("like-button--liked");
+    }
     // console.log(posts[index].likes);
   });
 }
+console.log(arrayCounter);
